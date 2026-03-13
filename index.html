@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>콘티곰 - 뮤지션을 위한 셋리스트 관리 앱</title>
     <meta name="description" content="콘티곰은 뮤지션, 밴드, 워십팀을 위한 전문 셋리스트 관리 앱입니다. 곡 관리, 악보, 셋리스트 구성을 한곳에서.">
-    <meta name="apple-itunes-app" content="app-id=YOUR_APP_STORE_ID">
+    <meta name="apple-itunes-app" content="app-id=6738030295">
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
@@ -66,18 +66,36 @@
             font-weight: 700;
         }
 
-        .nav-download {
-            background: var(--gold);
-            color: #000;
-            text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: opacity 0.2s;
+        .nav-store-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
 
-        .nav-download:hover {
+        .nav-store-btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-store-btn.ios {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .nav-store-btn.android {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .nav-store-btn:hover {
             opacity: 0.85;
         }
 
@@ -108,17 +126,32 @@
             margin: 0 auto 40px;
         }
 
-        .app-store-badge {
+        .store-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .store-badge {
             display: inline-block;
             transition: transform 0.2s;
         }
 
-        .app-store-badge:hover {
+        .store-badge:hover {
             transform: scale(1.05);
         }
 
-        .app-store-badge img {
+        .store-badge img {
             height: 52px;
+            display: block;
+        }
+
+        .store-badge.google img {
+            height: 76px;
+            margin-top: -12px;
+            margin-bottom: -12px;
         }
 
         /* Features */
@@ -143,6 +176,10 @@
             border-color: var(--gold);
         }
 
+        .feature-card.new {
+            border-color: rgba(217, 165, 33, 0.3);
+        }
+
         .feature-icon {
             width: 48px;
             height: 48px;
@@ -165,6 +202,20 @@
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.5;
+        }
+
+        .new-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            background: var(--gold-light);
+            border: 1px solid rgba(217, 165, 33, 0.3);
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-left: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.03em;
         }
 
         /* Footer */
@@ -210,6 +261,12 @@
                 padding: 40px 20px;
                 grid-template-columns: 1fr;
             }
+            .nav-store-btn span {
+                display: none;
+            }
+            .nav-store-btn {
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -219,15 +276,27 @@
             <div class="logo-icon">🎵</div>
             <span class="logo-text">콘티곰</span>
         </a>
-        <a href="https://apps.apple.com/app/id6738030295" class="nav-download">다운로드</a>
+        <div class="nav-store-buttons">
+            <a href="https://apps.apple.com/app/id6738030295" class="nav-store-btn ios">
+                <span>🍎</span><span>App Store</span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.contigom" class="nav-store-btn android">
+                <span>▶</span><span>Google Play</span>
+            </a>
+        </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="download">
         <h1>뮤지션을 위한<br><span>셋리스트 관리</span></h1>
         <p>곡 관리부터 셋리스트 구성, 악보 관리까지. 연습과 공연에 필요한 모든 것을 한곳에서 관리하세요.</p>
-        <a href="https://apps.apple.com/app/id6738030295" class="app-store-badge">
-            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83" alt="App Store에서 다운로드">
-        </a>
+        <div class="store-badges">
+            <a href="https://apps.apple.com/app/id6738030295" class="store-badge">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83" alt="App Store에서 다운로드">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.contigom" class="store-badge google">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드">
+            </a>
+        </div>
     </section>
 
     <section class="features">
@@ -241,6 +310,16 @@
             <h3>셋리스트 구성</h3>
             <p>공연별 셋리스트를 만들고 곡 순서를 자유롭게 편집하세요. 각 공연에 맞게 곡을 독립적으로 커스텀할 수 있습니다.</p>
         </div>
+        <div class="feature-card new">
+            <div class="feature-icon">🎸</div>
+            <h3>곡 구조 편집 <span class="new-badge">NEW</span></h3>
+            <p>인트로, 버스, 코러스, 브릿지 등 섹션을 추가하고 드래그로 순서를 변경하세요. 공연 흐름을 한눈에 파악할 수 있습니다.</p>
+        </div>
+        <div class="feature-card new">
+            <div class="feature-icon">🎬</div>
+            <h3>공연 모드 <span class="new-badge">NEW</span></h3>
+            <p>악보를 전체 화면으로 보며 공연에 집중하세요. 곡 정보와 구조가 함께 표시되어 팀 전체가 흐름을 함께 따라갈 수 있습니다.</p>
+        </div>
         <div class="feature-card">
             <div class="feature-icon">🎼</div>
             <h3>악보 관리</h3>
@@ -250,6 +329,11 @@
             <div class="feature-icon">☁️</div>
             <h3>iCloud 동기화</h3>
             <p>iPhone과 iPad에서 자동으로 동기화됩니다. 어디서든 같은 라이브러리에 접근하세요.</p>
+        </div>
+        <div class="feature-card new">
+            <div class="feature-icon">📱</div>
+            <h3>iPhone · iPad 최적화 <span class="new-badge">NEW</span></h3>
+            <p>iPhone은 탭 기반, iPad는 사이드바 레이아웃으로 각 기기에 최적화된 경험을 제공합니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🤝</div>
@@ -268,8 +352,9 @@
             <a href="mailto:eunkwanbear@gmail.com">문의하기</a>
             <a href="privacy.html">개인정보 처리방침</a>
             <a href="https://apps.apple.com/app/id6738030295">App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.contigom">Google Play</a>
         </div>
-        <p class="footer-copy">&copy; 2025 콘티곰. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 콘티곰. All rights reserved.</p>
     </footer>
 </body>
 </html>
