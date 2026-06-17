@@ -18,11 +18,7 @@
             --border: rgba(255,255,255,0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -40,6 +36,7 @@
             align-items: center;
             max-width: 1080px;
             margin: 0 auto;
+            gap: 12px;
         }
 
         .logo {
@@ -48,6 +45,7 @@
             gap: 10px;
             text-decoration: none;
             color: var(--text);
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -61,16 +59,80 @@
             font-size: 18px;
         }
 
-        .logo-text {
-            font-size: 18px;
-            font-weight: 700;
+        .logo-text { font-size: 18px; font-weight: 700; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-store-buttons {
-            display: flex;
-            gap: 10px;
-            align-items: center;
+        /* Language Picker */
+        .lang-picker {
+            position: relative;
         }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: border-color 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--gold);
+            color: var(--text);
+        }
+
+        .lang-btn .arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .lang-picker.open .lang-btn .arrow { transform: rotate(180deg); }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: #1A1A1A;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 6px;
+            z-index: 100;
+            min-width: 160px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .lang-picker.open .lang-dropdown { display: block; }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-secondary);
+            transition: background 0.15s, color 0.15s;
+            white-space: nowrap;
+        }
+
+        .lang-option:hover { background: var(--gold-light); color: var(--text); }
+        .lang-option.active { color: var(--gold); font-weight: 600; }
+
+        /* Nav store buttons */
+        .nav-store-buttons { display: flex; gap: 10px; align-items: center; }
 
         .nav-store-btn {
             text-decoration: none;
@@ -84,20 +146,9 @@
             gap: 6px;
         }
 
-        .nav-store-btn.ios {
-            background: var(--gold);
-            color: #000;
-        }
-
-        .nav-store-btn.android {
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-        }
-
-        .nav-store-btn:hover {
-            opacity: 0.85;
-        }
+        .nav-store-btn.ios { background: var(--gold); color: #000; }
+        .nav-store-btn.android { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+        .nav-store-btn:hover { opacity: 0.85; }
 
         /* Hero */
         .hero {
@@ -115,16 +166,8 @@
             letter-spacing: -0.02em;
         }
 
-        .hero h1 span {
-            color: var(--gold);
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 480px;
-            margin: 0 auto 40px;
-        }
+        .hero h1 span { color: var(--gold); }
+        .hero p { font-size: 18px; color: var(--text-secondary); max-width: 480px; margin: 0 auto 40px; }
 
         .store-badges {
             display: flex;
@@ -134,25 +177,10 @@
             flex-wrap: wrap;
         }
 
-        .store-badge {
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-
-        .store-badge:hover {
-            transform: scale(1.05);
-        }
-
-        .store-badge img {
-            height: 52px;
-            display: block;
-        }
-
-        .store-badge.google img {
-            height: 76px;
-            margin-top: -12px;
-            margin-bottom: -12px;
-        }
+        .store-badge { display: inline-block; transition: transform 0.2s; }
+        .store-badge:hover { transform: scale(1.05); }
+        .store-badge img { height: 52px; display: block; }
+        .store-badge.google img { height: 76px; margin-top: -12px; margin-bottom: -12px; }
 
         /* Features */
         .features {
@@ -172,13 +200,8 @@
             transition: border-color 0.3s;
         }
 
-        .feature-card:hover {
-            border-color: var(--gold);
-        }
-
-        .feature-card.new {
-            border-color: rgba(217, 165, 33, 0.3);
-        }
+        .feature-card:hover { border-color: var(--gold); }
+        .feature-card.new { border-color: rgba(217, 165, 33, 0.3); }
 
         .feature-icon {
             width: 48px;
@@ -192,17 +215,8 @@
             margin-bottom: 16px;
         }
 
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
+        .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
 
         .new-badge {
             display: inline-block;
@@ -235,38 +249,17 @@
             flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .footer-copy {
-            font-size: 13px;
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-copy { font-size: 13px; color: var(--text-secondary); opacity: 0.6; }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .hero {
-                padding: 48px 20px 40px;
-            }
-            .features {
-                padding: 40px 20px;
-                grid-template-columns: 1fr;
-            }
-            .nav-store-btn span {
-                display: none;
-            }
-            .nav-store-btn {
-                padding: 8px 12px;
-            }
+            .hero { padding: 48px 20px 40px; }
+            .features { padding: 40px 20px; grid-template-columns: 1fr; }
+            .nav-store-btn span.label { display: none; }
+            .nav-store-btn { padding: 8px 12px; }
+            .logo-text { display: none; }
         }
     </style>
 </head>
@@ -276,105 +269,551 @@
             <div class="logo-icon">🎵</div>
             <span class="logo-text">콘티곰</span>
         </a>
-        <div class="nav-store-buttons">
-            <a href="https://apps.apple.com/app/id6738030295" class="nav-store-btn ios">
-                <span>🍎</span><span>App Store</span>
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.contigom" class="nav-store-btn android">
-                <span>▶</span><span>Google Play</span>
-            </a>
+        <div class="header-right">
+            <!-- Language Picker -->
+            <div class="lang-picker" id="langPicker">
+                <button class="lang-btn" id="langBtn" onclick="toggleLangDropdown()">
+                    <span id="currentLangLabel">🌐 한국어</span>
+                    <span class="arrow">▾</span>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <div class="lang-option" data-lang="ko"  onclick="setLang('ko')">🇰🇷 한국어</div>
+                    <div class="lang-option" data-lang="en"  onclick="setLang('en')">🇺🇸 English</div>
+                    <div class="lang-option" data-lang="ja"  onclick="setLang('ja')">🇯🇵 日本語</div>
+                    <div class="lang-option" data-lang="de"  onclick="setLang('de')">🇩🇪 Deutsch</div>
+                    <div class="lang-option" data-lang="fr"  onclick="setLang('fr')">🇫🇷 Français</div>
+                    <div class="lang-option" data-lang="it"  onclick="setLang('it')">🇮🇹 Italiano</div>
+                    <div class="lang-option" data-lang="es"  onclick="setLang('es')">🇪🇸 Español</div>
+                    <div class="lang-option" data-lang="pt"  onclick="setLang('pt')">🇧🇷 Português</div>
+                    <div class="lang-option" data-lang="zh-Hans" onclick="setLang('zh-Hans')">🇨🇳 中文(简体)</div>
+                    <div class="lang-option" data-lang="zh-Hant" onclick="setLang('zh-Hant')">🇹🇼 中文(繁體)</div>
+                </div>
+            </div>
+            <!-- Store buttons -->
+            <div class="nav-store-buttons">
+                <a href="https://apps.apple.com/app/id6738030295" class="nav-store-btn ios">
+                    <span>🍎</span><span class="label">App Store</span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.contigom" class="nav-store-btn android">
+                    <span>▶</span><span class="label">Google Play</span>
+                </a>
+            </div>
         </div>
     </header>
 
     <section class="hero" id="download">
-        <h1>뮤지션을 위한<br><span>셋리스트 관리</span></h1>
-        <p>곡 관리부터 셋리스트 구성, 악보 관리까지. 연습과 공연에 필요한 모든 것을 한곳에서 관리하세요.</p>
+        <h1><span data-i18n="hero.h1.line1">뮤지션을 위한</span><br><span class="gold" data-i18n="hero.h1.line2">셋리스트 관리</span></h1>
+        <p data-i18n="hero.p">곡 관리부터 셋리스트 구성, 악보 관리까지. 연습과 공연에 필요한 모든 것을 한곳에서 관리하세요.</p>
         <div class="store-badges">
             <a href="https://apps.apple.com/app/id6738030295" class="store-badge">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83" alt="App Store에서 다운로드">
+                <img id="appStoreBadge" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83" alt="App Store">
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.contigom" class="store-badge google">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드">
+                <img id="googlePlayBadge" src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play">
             </a>
         </div>
     </section>
 
+    <style>.hero h1 .gold { color: var(--gold); }</style>
+
     <section class="features">
         <div class="feature-card">
             <div class="feature-icon">🎵</div>
-            <h3>곡 라이브러리</h3>
-            <p>코드, 템포, 박자 등 곡의 모든 정보를 체계적으로 관리합니다. 태그와 폴더로 깔끔하게 정리하세요.</p>
+            <h3 data-i18n="feature.songs.title">곡 라이브러리</h3>
+            <p data-i18n="feature.songs.desc">코드, 템포, 박자 등 곡의 모든 정보를 체계적으로 관리합니다. 태그와 폴더로 깔끔하게 정리하세요.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📋</div>
-            <h3>셋리스트 구성</h3>
-            <p>공연별 셋리스트를 만들고 곡 순서를 자유롭게 편집하세요. 각 공연에 맞게 곡을 독립적으로 커스텀할 수 있습니다.</p>
+            <h3 data-i18n="feature.setlist.title">셋리스트 구성</h3>
+            <p data-i18n="feature.setlist.desc">공연별 셋리스트를 만들고 곡 순서를 자유롭게 편집하세요. 각 공연에 맞게 곡을 독립적으로 커스텀할 수 있습니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎸</div>
-            <h3>곡 구조 편집</h3>
-            <p>인트로, 버스, 코러스, 브릿지 등 섹션을 추가하고 드래그로 순서를 변경하세요. 공연 흐름을 한눈에 파악할 수 있습니다.</p>
+            <h3 data-i18n="feature.structure.title">곡 구조 편집</h3>
+            <p data-i18n="feature.structure.desc">인트로, 버스, 코러스, 브릿지 등 섹션을 추가하고 드래그로 순서를 변경하세요. 공연 흐름을 한눈에 파악할 수 있습니다.</p>
         </div>
         <div class="feature-card new">
             <div class="feature-icon">🎹</div>
-            <h3>코드표 <span class="new-badge">NEW</span></h3>
-            <p>기타와 피아노 코드 다이어그램을 한 화면에서 확인하세요. 코드를 탭하면 소리로 미리 들을 수 있고, 자주 쓰는 코드는 저장해두고 바로 꺼낼 수 있습니다.</p>
+            <h3><span data-i18n="feature.chords.title">코드표</span> <span class="new-badge" data-i18n="badge.new">NEW</span></h3>
+            <p data-i18n="feature.chords.desc">기타와 피아노 코드 다이어그램을 한 화면에서 확인하세요. 코드를 탭하면 소리로 미리 들을 수 있고, 자주 쓰는 코드는 저장해두고 바로 꺼낼 수 있습니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎼</div>
-            <h3>악보 관리</h3>
-            <p>사진이나 PDF로 악보를 추가하고 곡과 함께 관리하세요. 악보 위에 섹션 핀과 코드 핀을 직접 배치하고 자유롭게 필기할 수 있습니다.</p>
+            <h3 data-i18n="feature.sheet.title">악보 관리</h3>
+            <p data-i18n="feature.sheet.desc">사진이나 PDF로 악보를 추가하고 곡과 함께 관리하세요. 악보 위에 섹션 핀과 코드 핀을 직접 배치하고 자유롭게 필기할 수 있습니다.</p>
         </div>
         <div class="feature-card new">
             <div class="feature-icon">📌</div>
-            <h3>악보 핀 & 필기 <span class="new-badge">NEW</span></h3>
-            <p>악보 위에 섹션 핀과 코드 핀을 원하는 위치에 배치하세요. 자유 필기로 연주 메모를 직접 악보에 남길 수 있습니다.</p>
+            <h3><span data-i18n="feature.pins.title">악보 핀 &amp; 필기</span> <span class="new-badge" data-i18n="badge.new">NEW</span></h3>
+            <p data-i18n="feature.pins.desc">악보 위에 섹션 핀과 코드 핀을 원하는 위치에 배치하세요. 자유 필기로 연주 메모를 직접 악보에 남길 수 있습니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎬</div>
-            <h3>공연 모드</h3>
-            <p>악보를 전체 화면으로 보며 공연에 집중하세요. 곡 정보와 구조가 함께 표시되어 팀 전체가 흐름을 함께 따라갈 수 있습니다.</p>
+            <h3 data-i18n="feature.performance.title">공연 모드</h3>
+            <p data-i18n="feature.performance.desc">악보를 전체 화면으로 보며 공연에 집중하세요. 곡 정보와 구조가 함께 표시되어 팀 전체가 흐름을 함께 따라갈 수 있습니다.</p>
         </div>
         <div class="feature-card new">
             <div class="feature-icon">▶️</div>
-            <h3>YouTube 링크 <span class="new-badge">NEW</span></h3>
-            <p>곡마다 YouTube 링크를 등록해두세요. 원곡을 바로 재생하며 연습하거나 팀원과 레퍼런스를 공유할 수 있습니다.</p>
+            <h3><span data-i18n="feature.youtube.title">YouTube 링크</span> <span class="new-badge" data-i18n="badge.new">NEW</span></h3>
+            <p data-i18n="feature.youtube.desc">곡마다 YouTube 링크를 등록해두세요. 원곡을 바로 재생하며 연습하거나 팀원과 레퍼런스를 공유할 수 있습니다.</p>
         </div>
         <div class="feature-card new">
             <div class="feature-icon">🌍</div>
-            <h3>10개 언어 지원 <span class="new-badge">NEW</span></h3>
-            <p>한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 포르투갈어, 독일어, 프랑스어, 이탈리아어로 이용할 수 있습니다. 기기 언어에 맞게 자동으로 전환됩니다.</p>
+            <h3><span data-i18n="feature.languages.title">10개 언어 지원</span> <span class="new-badge" data-i18n="badge.new">NEW</span></h3>
+            <p data-i18n="feature.languages.desc">한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 포르투갈어, 독일어, 프랑스어, 이탈리아어로 이용할 수 있습니다. 기기 언어에 맞게 자동으로 전환됩니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">☁️</div>
-            <h3>iCloud 동기화</h3>
-            <p>iPhone과 iPad에서 자동으로 동기화됩니다. 어디서든 같은 라이브러리에 접근하세요.</p>
+            <h3 data-i18n="feature.icloud.title">iCloud 동기화</h3>
+            <p data-i18n="feature.icloud.desc">iPhone과 iPad에서 자동으로 동기화됩니다. 어디서든 같은 라이브러리에 접근하세요.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📱</div>
-            <h3>iPhone · iPad 최적화</h3>
-            <p>iPhone은 탭 기반, iPad는 사이드바 레이아웃으로 각 기기에 최적화된 경험을 제공합니다.</p>
+            <h3 data-i18n="feature.ipad.title">iPhone · iPad 최적화</h3>
+            <p data-i18n="feature.ipad.desc">iPhone은 탭 기반, iPad는 사이드바 레이아웃으로 각 기기에 최적화된 경험을 제공합니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🤝</div>
-            <h3>곡 공유</h3>
-            <p>팀원에게 곡과 셋리스트를 간편하게 공유하세요. 링크 하나로 곡 정보를 전달할 수 있습니다.</p>
+            <h3 data-i18n="feature.share.title">곡 공유</h3>
+            <p data-i18n="feature.share.desc">팀원에게 곡과 셋리스트를 간편하게 공유하세요. 링크 하나로 곡 정보를 전달할 수 있습니다.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📄</div>
-            <h3>PDF 내보내기</h3>
-            <p>셋리스트를 PDF로 내보내서 인쇄하거나 공유하세요. 공연 현장에서 유용합니다.</p>
+            <h3 data-i18n="feature.pdf.title">PDF 내보내기</h3>
+            <p data-i18n="feature.pdf.desc">셋리스트를 PDF로 내보내서 인쇄하거나 공유하세요. 공연 현장에서 유용합니다.</p>
         </div>
     </section>
 
     <footer>
         <div class="footer-links">
-            <a href="mailto:eunkwanbear@gmail.com">문의하기</a>
-            <a href="privacy.html">개인정보 처리방침</a>
+            <a href="mailto:eunkwanbear@gmail.com" data-i18n="footer.contact">문의하기</a>
+            <a href="privacy.html" data-i18n="footer.privacy">개인정보 처리방침</a>
             <a href="https://apps.apple.com/app/id6738030295">App Store</a>
             <a href="https://play.google.com/store/apps/details?id=com.contigom">Google Play</a>
         </div>
-        <p class="footer-copy">&copy; 2026 콘티곰. All rights reserved.</p>
+        <p class="footer-copy" data-i18n="footer.copy">&copy; 2026 콘티곰. All rights reserved.</p>
     </footer>
+
+    <script>
+    const LANGS = {
+        ko:       { label: '🇰🇷 한국어',    badge: 'ko-kr' },
+        en:       { label: '🇺🇸 English',   badge: 'en-us' },
+        ja:       { label: '🇯🇵 日本語',    badge: 'ja-jp' },
+        de:       { label: '🇩🇪 Deutsch',   badge: 'de-de' },
+        fr:       { label: '🇫🇷 Français',  badge: 'fr-fr' },
+        it:       { label: '🇮🇹 Italiano',  badge: 'it-it' },
+        es:       { label: '🇪🇸 Español',   badge: 'es-es' },
+        pt:       { label: '🇧🇷 Português', badge: 'pt-br' },
+        'zh-Hans':{ label: '🇨🇳 中文(简体)', badge: 'zh-cn' },
+        'zh-Hant':{ label: '🇹🇼 中文(繁體)', badge: 'zh-tw' },
+    };
+
+    const T = {
+        ko: {
+            'page.title': '콘티곰 - 뮤지션을 위한 셋리스트 관리 앱',
+            'hero.h1.line1': '뮤지션을 위한', 'hero.h1.line2': '셋리스트 관리',
+            'hero.p': '곡 관리부터 셋리스트 구성, 악보 관리까지. 연습과 공연에 필요한 모든 것을 한곳에서 관리하세요.',
+            'badge.new': 'NEW',
+            'feature.songs.title': '곡 라이브러리',
+            'feature.songs.desc': '코드, 템포, 박자 등 곡의 모든 정보를 체계적으로 관리합니다. 태그와 폴더로 깔끔하게 정리하세요.',
+            'feature.setlist.title': '셋리스트 구성',
+            'feature.setlist.desc': '공연별 셋리스트를 만들고 곡 순서를 자유롭게 편집하세요. 각 공연에 맞게 곡을 독립적으로 커스텀할 수 있습니다.',
+            'feature.structure.title': '곡 구조 편집',
+            'feature.structure.desc': '인트로, 버스, 코러스, 브릿지 등 섹션을 추가하고 드래그로 순서를 변경하세요. 공연 흐름을 한눈에 파악할 수 있습니다.',
+            'feature.chords.title': '코드표',
+            'feature.chords.desc': '기타와 피아노 코드 다이어그램을 한 화면에서 확인하세요. 코드를 탭하면 소리로 미리 들을 수 있고, 자주 쓰는 코드는 저장해두고 바로 꺼낼 수 있습니다.',
+            'feature.sheet.title': '악보 관리',
+            'feature.sheet.desc': '사진이나 PDF로 악보를 추가하고 곡과 함께 관리하세요. 악보 위에 섹션 핀과 코드 핀을 직접 배치하고 자유롭게 필기할 수 있습니다.',
+            'feature.pins.title': '악보 핀 & 필기',
+            'feature.pins.desc': '악보 위에 섹션 핀과 코드 핀을 원하는 위치에 배치하세요. 자유 필기로 연주 메모를 직접 악보에 남길 수 있습니다.',
+            'feature.performance.title': '공연 모드',
+            'feature.performance.desc': '악보를 전체 화면으로 보며 공연에 집중하세요. 곡 정보와 구조가 함께 표시되어 팀 전체가 흐름을 함께 따라갈 수 있습니다.',
+            'feature.youtube.title': 'YouTube 링크',
+            'feature.youtube.desc': '곡마다 YouTube 링크를 등록해두세요. 원곡을 바로 재생하며 연습하거나 팀원과 레퍼런스를 공유할 수 있습니다.',
+            'feature.languages.title': '10개 언어 지원',
+            'feature.languages.desc': '한국어, 영어, 일본어, 중국어(간체·번체), 스페인어, 포르투갈어, 독일어, 프랑스어, 이탈리아어로 이용할 수 있습니다. 기기 언어에 맞게 자동으로 전환됩니다.',
+            'feature.icloud.title': 'iCloud 동기화',
+            'feature.icloud.desc': 'iPhone과 iPad에서 자동으로 동기화됩니다. 어디서든 같은 라이브러리에 접근하세요.',
+            'feature.ipad.title': 'iPhone · iPad 최적화',
+            'feature.ipad.desc': 'iPhone은 탭 기반, iPad는 사이드바 레이아웃으로 각 기기에 최적화된 경험을 제공합니다.',
+            'feature.share.title': '곡 공유',
+            'feature.share.desc': '팀원에게 곡과 셋리스트를 간편하게 공유하세요. 링크 하나로 곡 정보를 전달할 수 있습니다.',
+            'feature.pdf.title': 'PDF 내보내기',
+            'feature.pdf.desc': '셋리스트를 PDF로 내보내서 인쇄하거나 공유하세요. 공연 현장에서 유용합니다.',
+            'footer.contact': '문의하기', 'footer.privacy': '개인정보 처리방침',
+            'footer.copy': '© 2026 콘티곰. All rights reserved.',
+        },
+        en: {
+            'page.title': 'Contigom - Setlist Manager for Musicians',
+            'hero.h1.line1': 'Setlist Management', 'hero.h1.line2': 'for Musicians',
+            'hero.p': 'From song management to setlist building and sheet music. Everything you need for practice and performance, all in one place.',
+            'badge.new': 'NEW',
+            'feature.songs.title': 'Song Library',
+            'feature.songs.desc': 'Manage all your song details — chords, tempo, time signature, and more. Organize neatly with tags and folders.',
+            'feature.setlist.title': 'Setlist Builder',
+            'feature.setlist.desc': 'Create setlists for each show and edit the song order freely. Customize each song independently per performance.',
+            'feature.structure.title': 'Song Structure',
+            'feature.structure.desc': 'Add sections like Intro, Verse, Chorus, Bridge and reorder by dragging. See the full performance flow at a glance.',
+            'feature.chords.title': 'Chord Chart',
+            'feature.chords.desc': 'View guitar and piano chord diagrams on one screen. Tap to hear a chord, and save your favorites for instant access.',
+            'feature.sheet.title': 'Sheet Music',
+            'feature.sheet.desc': 'Add sheet music as photos or PDFs and manage them with songs. Place section and chord pins directly on the score and annotate freely.',
+            'feature.pins.title': 'Score Pins & Handwriting',
+            'feature.pins.desc': 'Place section and chord pins anywhere on the score. Write performance notes directly on your sheet music.',
+            'feature.performance.title': 'Performance Mode',
+            'feature.performance.desc': 'View sheet music fullscreen and focus on your performance. Song info and structure are always visible so your whole team can follow along.',
+            'feature.youtube.title': 'YouTube Links',
+            'feature.youtube.desc': 'Link a YouTube video to each song. Play the original while practicing or share references with your team.',
+            'feature.languages.title': '10 Languages',
+            'feature.languages.desc': 'Available in Korean, English, Japanese, Chinese (Simplified & Traditional), Spanish, Portuguese, German, French, and Italian. Automatically switches to your device language.',
+            'feature.icloud.title': 'iCloud Sync',
+            'feature.icloud.desc': 'Automatically syncs across iPhone and iPad. Access the same library from anywhere.',
+            'feature.ipad.title': 'iPhone · iPad Optimized',
+            'feature.ipad.desc': 'Tab-based layout on iPhone and sidebar layout on iPad — optimized for each device.',
+            'feature.share.title': 'Song Sharing',
+            'feature.share.desc': 'Share songs and setlists with teammates easily. Send song info with a single link.',
+            'feature.pdf.title': 'PDF Export',
+            'feature.pdf.desc': 'Export any setlist as a PDF to print or share. Perfect for the stage.',
+            'footer.contact': 'Contact', 'footer.privacy': 'Privacy Policy',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        ja: {
+            'page.title': 'コンティゴム - ミュージシャンのためのセットリスト管理',
+            'hero.h1.line1': 'ミュージシャンのための', 'hero.h1.line2': 'セットリスト管理',
+            'hero.p': '曲管理からセットリスト作成、楽譜管理まで。練習とライブに必要なすべてを一か所で。',
+            'badge.new': 'NEW',
+            'feature.songs.title': '曲ライブラリ',
+            'feature.songs.desc': 'コード、テンポ、拍子など曲のすべての情報を管理。タグとフォルダで整理できます。',
+            'feature.setlist.title': 'セットリスト作成',
+            'feature.setlist.desc': 'ライブごとにセットリストを作り、曲順を自由に編集。各ライブに合わせて曲を独立してカスタマイズできます。',
+            'feature.structure.title': '曲構成編集',
+            'feature.structure.desc': 'イントロ、バース、コーラス、ブリッジなどのセクションを追加してドラッグで並び替え。演奏の流れを一目で把握できます。',
+            'feature.chords.title': 'コード表',
+            'feature.chords.desc': 'ギターとピアノのコードダイアグラムを一画面で確認。タップして音を聴き、よく使うコードを保存できます。',
+            'feature.sheet.title': '楽譜管理',
+            'feature.sheet.desc': '写真やPDFで楽譜を追加して曲と一緒に管理。セクションピンやコードピンを直接配置して自由に書き込めます。',
+            'feature.pins.title': '楽譜ピン & 手書き',
+            'feature.pins.desc': '楽譜の好きな場所にセクションピンとコードピンを配置。演奏メモを直接楽譜に書き込めます。',
+            'feature.performance.title': 'パフォーマンスモード',
+            'feature.performance.desc': '楽譜をフルスクリーンで見ながらライブに集中。曲情報と構成が常に表示されてチーム全体が流れをつかめます。',
+            'feature.youtube.title': 'YouTubeリンク',
+            'feature.youtube.desc': '曲ごとにYouTubeリンクを登録。原曲を再生しながら練習したり、チームにリファレンスを共有できます。',
+            'feature.languages.title': '10言語対応',
+            'feature.languages.desc': '韓国語、英語、日本語、中国語（簡体・繁体）、スペイン語、ポルトガル語、ドイツ語、フランス語、イタリア語に対応。端末の言語に自動で切り替わります。',
+            'feature.icloud.title': 'iCloud同期',
+            'feature.icloud.desc': 'iPhoneとiPadで自動同期。どこからでも同じライブラリにアクセスできます。',
+            'feature.ipad.title': 'iPhone · iPad最適化',
+            'feature.ipad.desc': 'iPhoneはタブ型、iPadはサイドバーレイアウトで各デバイスに最適化された体験を提供します。',
+            'feature.share.title': '曲シェア',
+            'feature.share.desc': 'チームメンバーに曲とセットリストを簡単にシェア。リンク一つで曲情報を送れます。',
+            'feature.pdf.title': 'PDFエクスポート',
+            'feature.pdf.desc': 'セットリストをPDFに書き出して印刷やシェア。ライブ本番でも役立ちます。',
+            'footer.contact': 'お問い合わせ', 'footer.privacy': 'プライバシーポリシー',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        de: {
+            'page.title': 'Contigom - Setlist-Manager für Musiker',
+            'hero.h1.line1': 'Setlist-Verwaltung', 'hero.h1.line2': 'für Musiker',
+            'hero.p': 'Von der Song-Verwaltung über Setlist-Erstellung bis zur Notenorganisation. Alles für Probe und Auftritt an einem Ort.',
+            'badge.new': 'NEU',
+            'feature.songs.title': 'Song-Bibliothek',
+            'feature.songs.desc': 'Verwalte alle Song-Details — Akkorde, Tempo, Taktart und mehr. Ordne übersichtlich mit Tags und Ordnern.',
+            'feature.setlist.title': 'Setlist-Builder',
+            'feature.setlist.desc': 'Erstelle Setlists für jede Show und bearbeite die Reihenfolge frei. Passe jeden Song unabhängig pro Auftritt an.',
+            'feature.structure.title': 'Song-Struktur',
+            'feature.structure.desc': 'Füge Abschnitte wie Intro, Strophe, Refrain, Bridge hinzu und ordne per Drag um. Sieh den Auftrittsverlauf auf einen Blick.',
+            'feature.chords.title': 'Akkordtabelle',
+            'feature.chords.desc': 'Gitarren- und Klavierakkord-Diagramme auf einem Bildschirm. Tippe zum Hören und speichere Lieblingsakkorde.',
+            'feature.sheet.title': 'Notenblatt-Verwaltung',
+            'feature.sheet.desc': 'Noten als Fotos oder PDFs hinzufügen und mit Songs verwalten. Abschnitt- und Akkord-Pins direkt platzieren und frei annotieren.',
+            'feature.pins.title': 'Noten-Pins & Handschrift',
+            'feature.pins.desc': 'Platziere Abschnitt- und Akkord-Pins an beliebiger Stelle. Schreibe Spielnotizen direkt auf das Notenblatt.',
+            'feature.performance.title': 'Performance-Modus',
+            'feature.performance.desc': 'Noten im Vollbild anzeigen und auf den Auftritt konzentrieren. Song-Info und Struktur immer sichtbar.',
+            'feature.youtube.title': 'YouTube-Links',
+            'feature.youtube.desc': 'YouTube-Link pro Song hinterlegen. Original während der Probe abspielen oder Referenzen mit dem Team teilen.',
+            'feature.languages.title': '10 Sprachen',
+            'feature.languages.desc': 'Verfügbar auf Koreanisch, Englisch, Japanisch, Chinesisch (Vereinfacht & Traditionell), Spanisch, Portugiesisch, Deutsch, Französisch und Italienisch.',
+            'feature.icloud.title': 'iCloud-Synchronisation',
+            'feature.icloud.desc': 'Automatische Synchronisation zwischen iPhone und iPad. Greife von überall auf dieselbe Bibliothek zu.',
+            'feature.ipad.title': 'iPhone · iPad optimiert',
+            'feature.ipad.desc': 'Tab-basiertes Layout auf dem iPhone, Sidebar-Layout auf dem iPad — für jedes Gerät optimiert.',
+            'feature.share.title': 'Song teilen',
+            'feature.share.desc': 'Songs und Setlists einfach mit Teammitgliedern teilen. Song-Info per Link versenden.',
+            'feature.pdf.title': 'PDF-Export',
+            'feature.pdf.desc': 'Setlist als PDF exportieren zum Drucken oder Teilen. Ideal für die Bühne.',
+            'footer.contact': 'Kontakt', 'footer.privacy': 'Datenschutz',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        fr: {
+            'page.title': 'Contigom - Gestionnaire de Setlist pour Musiciens',
+            'hero.h1.line1': 'Gestion de Setlist', 'hero.h1.line2': 'pour Musiciens',
+            'hero.p': 'De la gestion des chansons à la création de setlists et des partitions. Tout ce dont vous avez besoin pour répéter et se produire, en un seul endroit.',
+            'badge.new': 'NOUVEAU',
+            'feature.songs.title': 'Bibliothèque de chansons',
+            'feature.songs.desc': 'Gérez tous les détails de vos chansons — accords, tempo, mesure, etc. Organisez avec des étiquettes et des dossiers.',
+            'feature.setlist.title': 'Créateur de setlist',
+            'feature.setlist.desc': "Créez des setlists pour chaque concert et modifiez l'ordre librement. Personnalisez chaque chanson indépendamment.",
+            'feature.structure.title': 'Structure de chanson',
+            'feature.structure.desc': "Ajoutez des sections Intro, Couplet, Refrain, Pont et réorganisez par glisser-déposer. Visualisez le déroulement en un coup d'œil.",
+            'feature.chords.title': "Tableau d'accords",
+            'feature.chords.desc': "Diagrammes d'accords guitare et piano sur un seul écran. Tapez pour écouter et sauvegardez vos favoris.",
+            'feature.sheet.title': 'Partitions',
+            'feature.sheet.desc': 'Ajoutez des partitions en photo ou PDF et gérez-les avec vos chansons. Placez des épingles et annotez librement.',
+            'feature.pins.title': 'Épingles & Annotations',
+            'feature.pins.desc': 'Placez des épingles de section et accords où vous voulez. Écrivez des notes directement sur vos partitions.',
+            'feature.performance.title': 'Mode Performance',
+            'feature.performance.desc': 'Partitions en plein écran pour vous concentrer sur la scène. Les infos et la structure sont toujours visibles.',
+            'feature.youtube.title': 'Liens YouTube',
+            'feature.youtube.desc': 'Associez un lien YouTube à chaque chanson. Écoutez l\'original en répétant ou partagez des références.',
+            'feature.languages.title': '10 langues',
+            'feature.languages.desc': 'Disponible en coréen, anglais, japonais, chinois (simplifié et traditionnel), espagnol, portugais, allemand, français et italien.',
+            'feature.icloud.title': 'Sync iCloud',
+            'feature.icloud.desc': "Synchronisation automatique entre iPhone et iPad. Accédez à la même bibliothèque depuis n'importe où.",
+            'feature.ipad.title': 'iPhone · iPad optimisé',
+            'feature.ipad.desc': 'Interface à onglets sur iPhone, barre latérale sur iPad — optimisé pour chaque appareil.',
+            'feature.share.title': 'Partage de chanson',
+            'feature.share.desc': 'Partagez facilement chansons et setlists avec votre équipe. Envoyez les infos par lien.',
+            'feature.pdf.title': 'Export PDF',
+            'feature.pdf.desc': 'Exportez la setlist en PDF pour imprimer ou partager. Idéal sur scène.',
+            'footer.contact': 'Contact', 'footer.privacy': 'Politique de confidentialité',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        it: {
+            'page.title': 'Contigom - Gestione Setlist per Musicisti',
+            'hero.h1.line1': 'Gestione Setlist', 'hero.h1.line2': 'per Musicisti',
+            'hero.p': 'Dalla gestione dei brani alla creazione di setlist e spartiti. Tutto ciò di cui hai bisogno per prove e concerti, in un unico posto.',
+            'badge.new': 'NUOVO',
+            'feature.songs.title': 'Libreria brani',
+            'feature.songs.desc': 'Gestisci tutti i dettagli dei brani — accordi, tempo, ritmo e altro. Organizza con tag e cartelle.',
+            'feature.setlist.title': 'Costruttore setlist',
+            'feature.setlist.desc': "Crea setlist per ogni concerto e modifica l'ordine liberamente. Personalizza ogni brano in modo indipendente.",
+            'feature.structure.title': 'Struttura brano',
+            'feature.structure.desc': "Aggiungi sezioni Intro, Strofa, Ritornello, Bridge e riordina trascinando. Visualizza il flusso del concerto a colpo d'occhio.",
+            'feature.chords.title': 'Diagramma accordi',
+            'feature.chords.desc': "Diagrammi di accordi per chitarra e pianoforte su un'unica schermata. Tocca per ascoltare e salva i preferiti.",
+            'feature.sheet.title': 'Spartiti',
+            'feature.sheet.desc': 'Aggiungi spartiti come foto o PDF e gestiscili con i brani. Posiziona pin di sezione e accordi e annota liberamente.',
+            'feature.pins.title': 'Pin & Annotazioni',
+            'feature.pins.desc': 'Posiziona pin di sezione e accordi dove vuoi. Scrivi note direttamente sullo spartito.',
+            'feature.performance.title': 'Modalità Performance',
+            'feature.performance.desc': 'Spartiti a schermo intero per concentrarti sul concerto. Info e struttura del brano sempre visibili.',
+            'feature.youtube.title': 'Link YouTube',
+            'feature.youtube.desc': 'Associa un link YouTube a ogni brano. Ascolta l\'originale durante le prove o condividi riferimenti.',
+            'feature.languages.title': '10 lingue',
+            'feature.languages.desc': 'Disponibile in coreano, inglese, giapponese, cinese (semplificato e tradizionale), spagnolo, portoghese, tedesco, francese e italiano.',
+            'feature.icloud.title': 'Sincronizzazione iCloud',
+            'feature.icloud.desc': 'Sincronizzazione automatica tra iPhone e iPad. Accedi alla stessa libreria ovunque.',
+            'feature.ipad.title': 'Ottimizzato iPhone · iPad',
+            'feature.ipad.desc': 'Layout a schede su iPhone, barra laterale su iPad — ottimizzato per ogni dispositivo.',
+            'feature.share.title': 'Condivisione brani',
+            'feature.share.desc': 'Condividi brani e setlist con il team facilmente. Invia le info con un solo link.',
+            'feature.pdf.title': 'Esporta PDF',
+            'feature.pdf.desc': 'Esporta la setlist in PDF per stamparla o condividerla. Perfetto sul palco.',
+            'footer.contact': 'Contatto', 'footer.privacy': 'Informativa sulla privacy',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        es: {
+            'page.title': 'Contigom - Gestor de Setlists para Músicos',
+            'hero.h1.line1': 'Gestión de Setlists', 'hero.h1.line2': 'para Músicos',
+            'hero.p': 'Desde la gestión de canciones hasta la creación de setlists y partituras. Todo lo que necesitas para ensayar y actuar, en un solo lugar.',
+            'badge.new': 'NUEVO',
+            'feature.songs.title': 'Biblioteca de canciones',
+            'feature.songs.desc': 'Gestiona todos los detalles de tus canciones — acordes, tempo, compás y más. Organiza con etiquetas y carpetas.',
+            'feature.setlist.title': 'Creador de setlists',
+            'feature.setlist.desc': 'Crea setlists para cada concierto y edita el orden libremente. Personaliza cada canción de forma independiente.',
+            'feature.structure.title': 'Estructura de canción',
+            'feature.structure.desc': 'Agrega secciones Intro, Verso, Coro, Puente y reordena arrastrando. Ve el flujo del concierto de un vistazo.',
+            'feature.chords.title': 'Tabla de acordes',
+            'feature.chords.desc': 'Diagramas de acordes de guitarra y piano en una pantalla. Toca para escuchar y guarda tus favoritos.',
+            'feature.sheet.title': 'Partituras',
+            'feature.sheet.desc': 'Agrega partituras como fotos o PDFs y gestiónalas con canciones. Coloca pines y anota libremente.',
+            'feature.pins.title': 'Pines & Anotaciones',
+            'feature.pins.desc': 'Coloca pines de sección y acorde donde quieras. Escribe notas directamente en la partitura.',
+            'feature.performance.title': 'Modo Actuación',
+            'feature.performance.desc': 'Partituras en pantalla completa para concentrarte en el concierto. Info y estructura siempre visibles.',
+            'feature.youtube.title': 'Enlaces YouTube',
+            'feature.youtube.desc': 'Enlaza un YouTube a cada canción. Reproduce el original mientras practicas o comparte referencias.',
+            'feature.languages.title': '10 idiomas',
+            'feature.languages.desc': 'Disponible en coreano, inglés, japonés, chino (simplificado y tradicional), español, portugués, alemán, francés e italiano.',
+            'feature.icloud.title': 'Sincronización iCloud',
+            'feature.icloud.desc': 'Sincronización automática entre iPhone y iPad. Accede a la misma biblioteca desde cualquier lugar.',
+            'feature.ipad.title': 'Optimizado iPhone · iPad',
+            'feature.ipad.desc': 'Diseño de pestañas en iPhone, barra lateral en iPad — optimizado para cada dispositivo.',
+            'feature.share.title': 'Compartir canciones',
+            'feature.share.desc': 'Comparte canciones y setlists con el equipo fácilmente. Envía la información con un enlace.',
+            'feature.pdf.title': 'Exportar PDF',
+            'feature.pdf.desc': 'Exporta la setlist como PDF para imprimir o compartir. Perfecto para el escenario.',
+            'footer.contact': 'Contacto', 'footer.privacy': 'Política de privacidad',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        pt: {
+            'page.title': 'Contigom - Gerenciador de Setlists para Músicos',
+            'hero.h1.line1': 'Gerenciamento de Setlists', 'hero.h1.line2': 'para Músicos',
+            'hero.p': 'Da gestão de músicas à criação de setlists e partituras. Tudo que você precisa para ensaios e shows, em um só lugar.',
+            'badge.new': 'NOVO',
+            'feature.songs.title': 'Biblioteca de músicas',
+            'feature.songs.desc': 'Gerencie todos os detalhes das músicas — acordes, tempo, compasso e mais. Organize com tags e pastas.',
+            'feature.setlist.title': 'Criador de setlist',
+            'feature.setlist.desc': 'Crie setlists para cada show e edite a ordem livremente. Personalize cada música de forma independente.',
+            'feature.structure.title': 'Estrutura da música',
+            'feature.structure.desc': 'Adicione seções Intro, Verso, Refrão, Ponte e reordene arrastando. Veja o fluxo do show de uma vez.',
+            'feature.chords.title': 'Tabela de acordes',
+            'feature.chords.desc': 'Diagramas de acordes para guitarra e piano em uma tela. Toque para ouvir e salve os favoritos.',
+            'feature.sheet.title': 'Partituras',
+            'feature.sheet.desc': 'Adicione partituras como fotos ou PDFs e gerencie com músicas. Coloque pinos e anote livremente.',
+            'feature.pins.title': 'Pinos & Anotações',
+            'feature.pins.desc': 'Coloque pinos de seção e acorde onde quiser. Escreva notas diretamente na partitura.',
+            'feature.performance.title': 'Modo Performance',
+            'feature.performance.desc': 'Partituras em tela cheia para se concentrar no show. Info e estrutura sempre visíveis.',
+            'feature.youtube.title': 'Links YouTube',
+            'feature.youtube.desc': 'Vincule um YouTube a cada música. Reproduza o original enquanto pratica ou compartilhe referências.',
+            'feature.languages.title': '10 idiomas',
+            'feature.languages.desc': 'Disponível em coreano, inglês, japonês, chinês (simplificado e tradicional), espanhol, português, alemão, francês e italiano.',
+            'feature.icloud.title': 'Sync iCloud',
+            'feature.icloud.desc': 'Sincronização automática entre iPhone e iPad. Acesse a mesma biblioteca de qualquer lugar.',
+            'feature.ipad.title': 'Otimizado iPhone · iPad',
+            'feature.ipad.desc': 'Layout de abas no iPhone, barra lateral no iPad — otimizado para cada dispositivo.',
+            'feature.share.title': 'Compartilhar músicas',
+            'feature.share.desc': 'Compartilhe músicas e setlists com a equipe facilmente. Envie as informações com um link.',
+            'feature.pdf.title': 'Exportar PDF',
+            'feature.pdf.desc': 'Exporte a setlist como PDF para imprimir ou compartilhar. Perfeito no palco.',
+            'footer.contact': 'Contato', 'footer.privacy': 'Política de Privacidade',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        'zh-Hans': {
+            'page.title': 'Contigom - 音乐人的曲目单管理',
+            'hero.h1.line1': '音乐人的', 'hero.h1.line2': '曲目单管理',
+            'hero.p': '从曲目管理到曲目单构建和乐谱管理，一站式满足排练和演出的所有需求。',
+            'badge.new': '新功能',
+            'feature.songs.title': '曲目库',
+            'feature.songs.desc': '管理所有曲目详情——和弦、速度、拍号等。用标签和文件夹整理得井井有条。',
+            'feature.setlist.title': '曲目单构建器',
+            'feature.setlist.desc': '为每场演出创建曲目单，自由编辑曲目顺序。可单独为每场演出定制每首曲目。',
+            'feature.structure.title': '曲目结构',
+            'feature.structure.desc': '添加前奏、主歌、副歌、桥段等段落，拖动重新排序。一眼掌握演出全局。',
+            'feature.chords.title': '和弦表',
+            'feature.chords.desc': '在一个界面查看吉他和钢琴和弦图表。点击试听，收藏常用和弦。',
+            'feature.sheet.title': '乐谱管理',
+            'feature.sheet.desc': '以照片或PDF形式添加乐谱并与曲目一起管理。直接放置段落和和弦图钉，自由标注。',
+            'feature.pins.title': '乐谱图钉 & 手写',
+            'feature.pins.desc': '在乐谱上任意位置放置段落和和弦图钉。直接在乐谱上手写演奏笔记。',
+            'feature.performance.title': '演出模式',
+            'feature.performance.desc': '全屏查看乐谱，专注演出。曲目信息和结构始终可见，全团同步。',
+            'feature.youtube.title': 'YouTube链接',
+            'feature.youtube.desc': '为每首曲目关联YouTube视频。练习时播放原曲，或与团队共享参考。',
+            'feature.languages.title': '10种语言',
+            'feature.languages.desc': '支持韩语、英语、日语、中文（简体和繁体）、西班牙语、葡萄牙语、德语、法语、意大利语，自动适应设备语言。',
+            'feature.icloud.title': 'iCloud同步',
+            'feature.icloud.desc': 'iPhone和iPad之间自动同步，随时随地访问相同曲库。',
+            'feature.ipad.title': 'iPhone · iPad优化',
+            'feature.ipad.desc': 'iPhone使用标签式布局，iPad使用侧边栏布局，针对每台设备优化体验。',
+            'feature.share.title': '分享曲目',
+            'feature.share.desc': '轻松与团队成员分享曲目和曲目单，一个链接发送所有信息。',
+            'feature.pdf.title': '导出PDF',
+            'feature.pdf.desc': '将曲目单导出为PDF，打印或分享。演出现场的好帮手。',
+            'footer.contact': '联系我们', 'footer.privacy': '隐私政策',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+        'zh-Hant': {
+            'page.title': 'Contigom - 音樂人的曲目單管理',
+            'hero.h1.line1': '音樂人的', 'hero.h1.line2': '曲目單管理',
+            'hero.p': '從曲目管理到曲目單建立和樂譜管理，一站式滿足排練和演出的所有需求。',
+            'badge.new': '新功能',
+            'feature.songs.title': '曲目庫',
+            'feature.songs.desc': '管理所有曲目詳情——和弦、速度、拍號等。用標籤和資料夾整理得井井有條。',
+            'feature.setlist.title': '曲目單建立器',
+            'feature.setlist.desc': '為每場演出建立曲目單，自由編輯曲目順序。可單獨為每場演出自訂每首曲目。',
+            'feature.structure.title': '曲目結構',
+            'feature.structure.desc': '新增前奏、主歌、副歌、橋段等段落，拖動重新排序。一眼掌握演出全局。',
+            'feature.chords.title': '和弦表',
+            'feature.chords.desc': '在一個介面查看吉他和鋼琴和弦圖表。點擊試聽，收藏常用和弦。',
+            'feature.sheet.title': '樂譜管理',
+            'feature.sheet.desc': '以照片或PDF形式新增樂譜並與曲目一起管理。直接放置段落和和弦圖釘，自由標註。',
+            'feature.pins.title': '樂譜圖釘 & 手寫',
+            'feature.pins.desc': '在樂譜上任意位置放置段落和和弦圖釘。直接在樂譜上手寫演奏筆記。',
+            'feature.performance.title': '演出模式',
+            'feature.performance.desc': '全螢幕查看樂譜，專注演出。曲目資訊和結構始終可見，全團同步。',
+            'feature.youtube.title': 'YouTube連結',
+            'feature.youtube.desc': '為每首曲目關聯YouTube影片。練習時播放原曲，或與團隊共享參考。',
+            'feature.languages.title': '10種語言',
+            'feature.languages.desc': '支援韓語、英語、日語、中文（簡體和繁體）、西班牙語、葡萄牙語、德語、法語、義大利語，自動適應裝置語言。',
+            'feature.icloud.title': 'iCloud同步',
+            'feature.icloud.desc': 'iPhone和iPad之間自動同步，隨時隨地存取相同曲庫。',
+            'feature.ipad.title': 'iPhone · iPad最佳化',
+            'feature.ipad.desc': 'iPhone使用標籤式版面，iPad使用側邊欄版面，針對每台裝置最佳化體驗。',
+            'feature.share.title': '分享曲目',
+            'feature.share.desc': '輕鬆與團隊成員分享曲目和曲目單，一個連結傳送所有資訊。',
+            'feature.pdf.title': '匯出PDF',
+            'feature.pdf.desc': '將曲目單匯出為PDF，列印或分享。演出現場的好幫手。',
+            'footer.contact': '聯絡我們', 'footer.privacy': '隱私權政策',
+            'footer.copy': '© 2026 Contigom. All rights reserved.',
+        },
+    };
+
+    // Detect language from browser or localStorage
+    function detectLang() {
+        const saved = localStorage.getItem('lang');
+        if (saved && T[saved]) return saved;
+        const nav = navigator.language || 'ko';
+        if (nav.startsWith('zh-Hant') || nav === 'zh-TW' || nav === 'zh-HK') return 'zh-Hant';
+        if (nav.startsWith('zh')) return 'zh-Hans';
+        const code = nav.split('-')[0];
+        const map = { ko:'ko', en:'en', ja:'ja', de:'de', fr:'fr', it:'it', es:'es', pt:'pt' };
+        return map[code] || 'ko';
+    }
+
+    function applyLang(lang) {
+        const dict = T[lang] || T['ko'];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key] !== undefined) el.textContent = dict[key];
+        });
+        // Page title
+        if (dict['page.title']) document.title = dict['page.title'];
+        // html lang attribute
+        document.documentElement.lang = lang.startsWith('zh') ? lang.replace('zh-','zh-').toLowerCase() : lang;
+        // App Store badge locale
+        const badgeLoc = LANGS[lang]?.badge || 'ko-kr';
+        const asBadge = document.getElementById('appStoreBadge');
+        if (asBadge) asBadge.src = `https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/${badgeLoc}?size=250x83`;
+        // Google Play badge locale
+        const gpBadge = document.getElementById('googlePlayBadge');
+        if (gpBadge) {
+            const gpLoc = badgeLoc.replace('-','_');
+            gpBadge.src = `https://play.google.com/intl/en_us/badges/static/images/badges/${gpLoc}_badge_web_generic.png`;
+        }
+        // Current lang label in button
+        document.getElementById('currentLangLabel').textContent = LANGS[lang]?.label || lang;
+        // Active state in dropdown
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+        localStorage.setItem('lang', lang);
+    }
+
+    function setLang(lang) {
+        applyLang(lang);
+        closeLangDropdown();
+    }
+
+    function toggleLangDropdown() {
+        document.getElementById('langPicker').classList.toggle('open');
+    }
+
+    function closeLangDropdown() {
+        document.getElementById('langPicker').classList.remove('open');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!document.getElementById('langPicker').contains(e.target)) {
+            closeLangDropdown();
+        }
+    });
+
+    // Init
+    applyLang(detectLang());
+    </script>
 </body>
 </html>
